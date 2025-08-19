@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NarcScan - AI-Powered Drug Sale Detection on Social Media</title>
+    <meta name="description" content="Advanced AI system detecting illicit drug transactions across encrypted social platforms with 92% accuracy">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@animxyz/core@0.4.0/dist/animxyz.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .shadow-soft {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .shadow-hard {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .keyword-pill {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .keyword-pill:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        .detection-card {
+            transition: all 0.3s ease;
+            backface-visibility: hidden;
+        }
+        
+        .detection-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px -5px #3b82f6;
+            }
+            to {
+                box-shadow: 0 0 20px -5px #3b82f6;
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">NarcScan</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Features</a>
+                    <a href="#demo" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Live Demo</a>
+                    <a href="#technology" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Technology</a>
+                    <a href="#analysis" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Analyzer</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Contact</a>
+                    <a href="#demo" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md hover:shadow-lg">Try Demo</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Features</a>
+                <a href="#demo" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Live Demo</a>
+                <a href="#technology" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Technology</a>
+                <a href="#analysis" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Analyzer</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Contact</a>
+                <a href="#demo" class="block px-3 py-2 bg-blue-600 text-white rounded-md text-base font-medium hover:bg-blue-700 mt-2">Try Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white pt-24 pb-20 md:pt-32 md:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="xyz-in" xyz="fade left-100% duration-10 stagger-1">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <span class="text-gradient">Detecting</span> Illicit Drug Sales on Encrypted Platforms
+                    </h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-lg">
+                        AI-powered surveillance system that identifies drug transactions across Telegram, Instagram, Twitter and Discord with 92% accuracy.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#demo" class="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-100 transition-colors shadow-lg text-center">
+                            <i class="fas fa-play mr-2"></i> Live Demo
+                        </a>
+                        <a href="#analysis" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white hover:text-blue-600 transition-colors text-center">
+                            <i class="fas fa-search mr-2"></i> Try Analyzer
+                        </a>
+                    </div>
+                </div>
+                <div class="xyz-in" xyz="fade right-100% duration-10">
+                    <div class="relative">
+                        <div class="absolute -top-10 -left-10 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+                        <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+                        <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
+                            <div class="bg-gray-900 p-4 flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div class="text-xs text-gray-400 ml-2">NarcScan Detection Dashboard</div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-secret text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">DarkMarket_420</div>
+                                        <div class="text-xs text-gray-500">2 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                    <p class="text-gray-800">🍁🔥 Top shelf available. Wickr: plug420 | BTC only #dank</p>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded">93% Match</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Cannabis</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded">Telegram</span>
+                                    </div>
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Trusted By</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
+                <div class="flex justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/DEA_Logo.svg/1200px-DEA_Logo.svg.png" alt="DEA" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Interpol_logo.svg/1200px-Interpol_logo.svg.png" alt="Interpol" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Department_of_Justice_logo.svg/1200px-Department_of_Justice_logo.svg.png" alt="DOJ" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/FBI_Seal.svg/1200px-FBI_Seal.svg.png" alt="FBI" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Features</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Advanced Detection Capabilities
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Our system combines multiple AI techniques to identify evolving drug sale patterns
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-robot text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Natural Language Processing</h4>
+                        <p class="text-gray-600 mb-4">
+                            Detects coded language, slang terms, and evolving drug terminology with contextual understanding.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>92% accuracy in text analysis</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Supports 15+ languages</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Contextual understanding</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-purple-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-image text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Image Recognition</h4>
+                        <p class="text-gray-600 mb-4">
+                            Identifies drug-related imagery including disguised product photos and coded visual symbols.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>87% accuracy in image detection</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Recognizes 50+ drug types</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Detects obscured packaging</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-project-diagram text-emerald-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Network Analysis</h4>
+                        <p class="text-gray-600 mb-4">
+                            Maps connections between accounts to identify distribution networks and key players.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Identifies distribution chains</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Detects burner accounts</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Visual connection mapping</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-amber-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-bolt text-amber-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Real-Time Alerts</h4>
+                        <p class="text-gray-600 mb-4">
+                            Instant notifications when high-confidence drug transactions are detected across platforms.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Sub-5 second detection</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Custom alert thresholds</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Multi-channel notifications</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-red-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Trend Analysis</h4>
+                        <p class="text-gray-600 mb-4">
+                            Identifies emerging drug trends, new slang terms, and shifting distribution methods.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Emerging pattern detection</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Geographic heatmaps</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Predictive analytics</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="xyz-in" xyz="fade small stagger-1 ease-out-back">
+                    <div class="bg-white p-8 rounded-xl shadow-soft hover:shadow-hard transition-shadow detection-card h-full">
+                        <div class="w-16 h-16 bg-indigo-50 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-lock text-indigo-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Privacy Compliance</h4>
+                        <p class="text-gray-600 mb-4">
+                            Fully compliant with privacy laws, analyzing only public data with ethical safeguards.
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>GDPR compliant</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Public data only</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Ethical AI framework</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl shadow-xl overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-blue-400/20">
+                    <div class="p-8 text-center">
+                        <div class="text-4xl font-bold text-white mb-2">
+                            <span class="counter" data-target="92">0</span>%
+                        </div>
+                        <div class="text-blue-100 font-medium">Detection Accuracy</div>
+                    </div>
+                    <div class="p-8 text-center">
+                        <div class="text-4xl font-bold text-white mb-2">
+                            <span class="counter" data-target="15">0</span>+
+                        </div>
+                        <div class="text-blue-100 font-medium">Supported Languages</div>
+                    </div>
+                    <div class="p-8 text-center">
+                        <div class="text-4xl font-bold text-white mb-2">
+                            <span class="counter" data-target="50000">0</span>+
+                        </div>
+                        <div class="text-blue-100 font-medium">Daily Scans</div>
+                    </div>
+                    <div class="p-8 text-center">
+                        <div class="text-4xl font-bold text-white mb-2">
+                            <span class="counter" data-target="42">0</span>sec
+                        </div>
+                        <div class="text-blue-100 font-medium">Avg. Detection Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Live Demo</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    See NarcScan in Action
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Explore our interactive dashboard with simulated detection data
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+                        <div class="bg-gray-900 px-6 py-4 flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <h4 class="text-white font-medium">Live Detection Feed</h4>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">LIVE</span>
+                                <button class="text-gray-400 hover:text-white">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex mb-6">
+                                <button class="px-4 py-2 bg-blue-600 text-white rounded-l-lg font-medium">All</button>
+                                <button class="px-4 py-2 bg-white border-t border-b border-gray-200 font-medium text-gray-700">Telegram</button>
+                                <button class="px-4 py-2 bg-white border-t border-b border-gray-200 font-medium text-gray-700">Twitter</button>
+                                <button class="px-4 py-2 bg-white border border-gray-200 rounded-r-lg font-medium text-gray-700">Instagram</button>
+                            </div>
+                            
+                            <div id="liveDetectionFeed" class="space-y-4 max-h-[500px] overflow-y-auto scroll-hidden">
+                                <!-- Detections will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl shadow-soft p-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-4">Detection Statistics</h4>
+                        <div class="h-64">
+                            <canvas id="statsChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-soft p-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-4">Platform Distribution</h4>
+                        <div class="h-64">
+                            <canvas id="platformChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-soft p-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-4">Trending Keywords</h4>
+                        <div id="keywordCloud" class="flex flex-wrap gap-2">
+                            <!-- Keywords will be loaded here -->
+                        </div>
+                        <div class="mt-4 text-sm text-gray-500">
+                            Click any keyword to analyze in the text analyzer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section id="technology" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Technology</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Advanced AI Architecture
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Combining cutting-edge machine learning with ethical data practices
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="relative">
+                        <div class="absolute -top-8 -left-8 w-48 h-48 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
+                        <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-emerald-100 rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
+                        <div class="relative bg-white p-8 rounded-xl shadow-soft border border-gray-100">
+                            <h4 class="text-xl font-bold text-gray-900 mb-4">System Architecture</h4>
+                            <div class="text-center my-4">
+                                <img src="https://mermaid.ink/svg/pako:eNpVkE1PwzAMhv9KlGsnTd2Pq8Rh4jBxQCqHHRAnbVK3qUmVdKzif0-dsQmJSLY_v35iO3ZtQZ0hLQ4w5x4dGjRg0aJBi4YsaXJkyZEnT4EiRUqUKVOhSpUaNWrUqdOgQZMmLVq0aNOhQ4cuXbp06dFnwIAhQ0aMGDNmwoQJU6ZMmTJjzpw5CxYsWLJixYo1GzZs2LJly5YdO3bs2LNnz4EDB44cOXLixJkzZy5cuHDlypUbd-78-AvQl0pK" alt="System Architecture" class="w-full h-auto">
+                            </div>
+                            <ol class="mt-6 space-y-3">
+                                <li class="flex items-start">
+                                    <span class="flex items-center justify-center bg-blue-100 text-blue-800 rounded-full w-6 h-6 mr-3 flex-shrink-0">1</span>
+                                    <span>Public data collection from social platforms</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="flex items-center justify-center bg-blue-100 text-blue-800 rounded-full w-6 h-6 mr-3 flex-shrink-0">2</span>
+                                    <span>Preprocessing and feature extraction</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="flex items-center justify-center bg-blue-100 text-blue-800 rounded-full w-6 h-6 mr-3 flex-shrink-0">3</span>
+                                    <span>Machine learning classification</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="flex items-center justify-center bg-blue-100 text-blue-800 rounded-full w-6 h-6 mr-3 flex-shrink-0">4</span>
+                                    <span>Result visualization and alerting</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">AI Model Stack</h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-language text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Natural Language Processing</h5>
+                                    <p class="text-gray-600 mt-1">BERT-based models fine-tuned on drug slang with contextual understanding</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-eye text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Computer Vision</h5>
+                                    <p class="text-gray-600 mt-1">YOLOv5 for drug imagery detection and ResNet for classification</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-emerald-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-network-wired text-emerald-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Network Analysis</h5>
+                                    <p class="text-gray-600 mt-1">Graph neural networks to map distribution networks and key players</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-amber-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-chart-bar text-amber-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Anomaly Detection</h5>
+                                    <p class="text-gray-600 mt-1">Isolation Forest and Autoencoders to identify novel patterns</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Ethical Considerations</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">Analyzes only public data with no private message scanning</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">GDPR compliant data processing with automatic anonymization</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">Human-in-the-loop validation for high-stakes decisions</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-600">Regular bias audits to prevent discriminatory patterns</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text Analyzer Section -->
+    <section id="analysis" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Analyzer</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Text Analysis Tool
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Test our detection system with your own text samples
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+                        <div class="bg-gray-900 px-6 py-4">
+                            <h4 class="text-white font-medium">
+                                <i class="fas fa-search mr-2"></i> Text Analyzer
+                            </h4>
+                        </div>
+                        <div class="p-6">
+                            <form id="analysisForm">
+                                <div class="mb-6">
+                                    <label for="textToAnalyze" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Enter suspicious text to analyze
+                                    </label>
+                                    <textarea id="textToAnalyze" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., '🍁 available, DM for menu. BTC accepted'"></textarea>
+                                </div>
+                                <div class="flex justify-between">
+                                    <button type="button" id="sampleBtn" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-file-alt mr-2"></i> Load Sample
+                                    </button>
+                                    <button type="submit" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md">
+                                        <i class="fas fa-search mr-2"></i> Analyze Text
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-xl shadow-soft overflow-hidden h-full">
+                        <div class="bg-gray-900 px-6 py-4">
+                            <h4 class="text-white font-medium">
+                                <i class="fas fa-chart-pie mr-2"></i> Analysis Results
+                            </h4>
+                        </div>
+                        <div class="p-6">
+                            <div id="analysisResults" class="flex items-center justify-center h-64">
+                                <div class="text-center">
+                                    <i class="fas fa-search text-gray-300 text-4xl mb-3"></i>
+                                    <p class="text-gray-500">Enter text and click "Analyze" to see results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Testimonials</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Trusted by Law Enforcement
+                </h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user-tie text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">John Smith</h4>
+                            <p class="text-sm text-gray-500">DEA Special Agent</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "NarcScan has revolutionized our digital surveillance capabilities. We've identified three major distribution networks in the first month of using the system."
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user-shield text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-500">Cybercrime Division, FBI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The AI's ability to detect evolving slang terms has been invaluable. We're seeing patterns weeks before they show up in traditional intelligence reports."
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-balance-scale text-emerald-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Michael Chen</h4>
+                            <p class="text-sm text-gray-500">Privacy Compliance Officer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "I was skeptical about the privacy implications, but NarcScan's commitment to ethical AI and public data only has made it compliant with our strict standards."
+                    </p>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Combat Digital Drug Sales?</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Join law enforcement agencies worldwide using NarcScan to stay ahead of illicit online drug markets.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact" class="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-100 transition-colors shadow-lg">
+                    <i class="fas fa-envelope mr-2"></i> Contact Sales
+                </a>
+                <a href="#demo" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-bold hover:bg-white hover:text-blue-600 transition-colors">
+                    <i class="fas fa-play mr-2"></i> Live Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base font-semibold text-blue-600 uppercase tracking-wider">Contact</h2>
+                <h3 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Get In Touch
+                </h3>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Contact our team for more information or to schedule a demo
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-900 mb-6">Send us a message</h4>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-xl shadow-soft p-8 border border-gray-100 h-full">
+                        <h4 class="text-xl font-bold text-gray-900 mb-6">Contact Information</h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Headquarters</h5>
+                                    <p class="text-gray-600 mt-1">123 Cyber Security Way, Suite 500<br>San Francisco, CA 94107</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-phone-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Phone</h5>
+                                    <p class="text-gray-600 mt-1">+1 (555) 123-4567<br>Mon-Fri, 9am-5pm PST</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-emerald-100 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-900">Email</h5>
+                                    <p class="text-gray-600 mt-1">info@narcscan.com<br>support@narcscan.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h5 class="font-bold text-gray-900 mb-4">Follow Us</h5>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">NarcScan</span>
+                    </div>
+                    <p class="text-gray-400">
+                        AI-powered detection of illicit drug transactions on social media platforms.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Product</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#demo" class="text-gray-400 hover:text-white transition-colors">Live Demo</a></li>
+                        <li><a href="#technology" class="text-gray-400 hover:text-white transition-colors">Technology</a></li>
+                        <li><a href="#analysis" class="text-gray-400 hover:text-white transition-colors">Text Analyzer</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Company</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ethics Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    &copy; 2023 NarcScan. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stats Chart
+            const statsCtx = document.getElementById('statsChart').getContext('2d');
+            new Chart(statsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Telegram', 'Twitter', 'Instagram', 'Discord'],
+                    datasets: [{
+                        label: 'Potential Detections',
+                        data: [18, 12, 8, 5],
+                        backgroundColor: [
+                            'rgba(0, 136, 204, 0.7)',
+                            'rgba(29, 161, 242, 0.7)',
+                            'rgba(225, 48, 108, 0.7)',
+                            'rgba(88, 101, 242, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 136, 204, 1)',
+                            'rgba(29, 161, 242, 1)',
+                            'rgba(225, 48, 108, 1)',
+                            'rgba(88, 101, 242, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Platform Chart
+            const platformCtx = document.getElementById('platformChart').getContext('2d');
+            new Chart(platformCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Telegram', 'Twitter', 'Instagram', 'Discord'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            'rgba(0, 136, 204, 0.7)',
+                            'rgba(29, 161, 242, 0.7)',
+                            'rgba(225, 48, 108, 0.7)',
+                            'rgba(88, 101, 242, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 136, 204, 1)',
+                            'rgba(29, 161, 242, 1)',
+                            'rgba(225, 48, 108, 1)',
+                            'rgba(88, 101, 242, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Load sample detections
+            loadSampleDetections();
+            loadKeywordCloud();
+
+            // Form submission
+            document.getElementById('analysisForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    analyzeText(e); // Pass the event object
+});
+
+            // Sample button
+            document.getElementById('sampleBtn').addEventListener('click', function() {
+                const samples = [
+                    "🍁🔥 Top shelf available. Wickr: plug420 | BTC only #dank",
+                    "Need a 🔌 in LA? DM for menu. Cashapp ready, no time wasters",
+                    "🌿🍄 Special treats available. Secure comms only: signal@5551234",
+                    "❄️💊 Party supplies. Telegram: @ice_man | Escrow accepted",
+                    "🍫🌈 Microdosing available. Wickr: shroomguy | Monero preferred",
+                    "💊🔥 Pharma grade. Telegram: @pillman | BTC/ETH accepted"
+                ];
+                document.getElementById('textToAnalyze').value = samples[Math.floor(Math.random() * samples.length)];
+            });
+
+            // Counter animation
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(updateCounter, 1);
+                } else {
+                    counter.innerText = target;
+                }
+                
+                function updateCounter() {
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCounter, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+            });
+
+            // Typed.js animation for hero section
+            new Typed('#typed-text', {
+                strings: ["Detecting", "Analyzing", "Identifying", "Monitoring"],
+                typeSpeed: 100,
+                backSpeed: 50,
+                loop: true,
+                showCursor: false
+            });
+        });
+
+        // Load sample detections
+        function loadSampleDetections() {
+            const feed = document.getElementById('liveDetectionFeed');
+            feed.innerHTML = '';
+            
+            const detections = [
+                {
+                    platform: 'telegram',
+                    content: '🍁🔥 Top quality available. Wickr: dealer123 | BTC accepted #420',
+                    confidence: 0.89,
+                    keywords: ['🍁', '🔥', 'Wickr', 'BTC', '#420'],
+                    time: '2 hours ago',
+                    risk: 'High'
+                },
+                {
+                    platform: 'twitter',
+                    content: 'Need 🔌 in NYC? DM for menu. Cashapp/Venmo ready',
+                    confidence: 0.76,
+                    keywords: ['🔌', 'DM', 'menu', 'Cashapp'],
+                    time: '5 hours ago',
+                    risk: 'Medium'
+                },
+                {
+                    platform: 'instagram',
+                    content: '🌿🍫🍄 Special "treats" available. Signal only: 555-1234',
+                    confidence: 0.82,
+                    keywords: ['🌿', '🍫', '🍄', 'treats', 'Signal'],
+                    time: '1 day ago',
+                    risk: 'High'
+                },
+                {
+                    platform: 'discord',
+                    content: '❄️💊 Bulk available. Wickr: snowman | Monero preferred',
+                    confidence: 0.91,
+                    keywords: ['❄️', '💊', 'Wickr', 'Monero'],
+                    time: '3 hours ago',
+                    risk: 'Critical'
+                },
+                {
+                    platform: 'telegram',
+                    content: '🌈🍄 Microdosing packs. SecureDrop: mushguy | BTC only',
+                    confidence: 0.85,
+                    keywords: ['🌈', '🍄', 'Microdosing', 'SecureDrop', 'BTC'],
+                    time: '7 hours ago',
+                    risk: 'High'
+                },
+                {
+                    platform: 'twitter',
+                    content: '💊 Pharma grade. Telegram: @pillman | Escrow accepted',
+                    confidence: 0.78,
+                    keywords: ['💊', 'Pharma', 'Telegram', 'Escrow'],
+                    time: '12 hours ago',
+                    risk: 'Medium'
+                }
+            ];
+
+            detections.forEach(detection => {
+                const platformIcons = {
+                    'telegram': 'fab fa-telegram',
+                    'twitter': 'fab fa-twitter',
+                    'instagram': 'fab fa-instagram',
+                    'discord': 'fab fa-discord'
+                };
+
+                const platformColors = {
+                    'telegram': 'bg-blue-100 text-blue-800',
+                    'twitter': 'bg-sky-100 text-sky-800',
+                    'instagram': 'bg-pink-100 text-pink-800',
+                    'discord': 'bg-indigo-100 text-indigo-800'
+                };
+
+                const riskColors = {
+                    'Critical': 'bg-red-100 text-red-800',
+                    'High': 'bg-orange-100 text-orange-800',
+                    'Medium': 'bg-yellow-100 text-yellow-800',
+                    'Low': 'bg-green-100 text-green-800'
+                };
+
+                const detectionElement = `
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-200 transition-colors">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center">
+                                <span class="${platformColors[detection.platform]} px-2 py-1 rounded-full text-xs font-medium mr-2">
+                                    <i class="${platformIcons[detection.platform]} mr-1"></i>
+                                    ${detection.platform.charAt(0).toUpperCase() + detection.platform.slice(1)}
+                                </span>
+                                <span class="${riskColors[detection.risk]} px-2 py-1 rounded-full text-xs font-medium">
+                                    ${detection.risk} Risk
+                                </span>
+                            </div>
+                            <span class="text-xs text-gray-500">${detection.time}</span>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg mb-3">
+                            <p class="text-gray-800">"${detection.content}"</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            ${detection.keywords.map(kw => `
+                                <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
+                                    ${kw}
+                                </span>
+                            `).join('')}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: ${Math.round(detection.confidence * 100)}%"></div>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700">
+                                ${Math.round(detection.confidence * 100)}% Confidence
+                            </span>
+                        </div>
+                    </div>
+                `;
+                feed.innerHTML += detectionElement;
+            });
+        }
+
+        // Load keyword cloud
+        function loadKeywordCloud() {
+            const cloud = document.getElementById('keywordCloud');
+            const keywords = [
+                { text: '🍁', weight: 24, class: 'bg-red-100 text-red-800' },
+                { text: '🔥', weight: 20, class: 'bg-orange-100 text-orange-800' },
+                { text: '🔌', weight: 18, class: 'bg-blue-100 text-blue-800' },
+                { text: 'Wickr', weight: 16, class: 'bg-green-100 text-green-800' },
+                { text: 'BTC', weight: 14, class: 'bg-cyan-100 text-cyan-800' },
+                { text: '#420', weight: 12, class: 'bg-gray-100 text-gray-800' },
+                { text: 'DM', weight: 10, class: 'bg-purple-100 text-purple-800' },
+                { text: '🍄', weight: 8, class: 'bg-emerald-100 text-emerald-800' },
+                { text: '❄️', weight: 6, class: 'bg-sky-100 text-sky-800' },
+                { text: '💊', weight: 8, class: 'bg-pink-100 text-pink-800' },
+                { text: 'Monero', weight: 6, class: 'bg-indigo-100 text-indigo-800' },
+                { text: 'Escrow', weight: 6, class: 'bg-amber-100 text-amber-800' }
+            ];
+
+            keywords.forEach(kw => {
+                cloud.innerHTML += `
+                    <span class="${kw.class} keyword-pill text-xs font-medium px-3 py-1 rounded-full cursor-pointer" 
+                          style="font-size: ${kw.weight}px;" 
+                          onclick="analyzeKeyword('${kw.text}')">
+                        ${kw.text}
+                    </span>
+                `;
+            });
+        }
+
+        // Analyze keyword
+function analyzeKeyword(keyword) {
+    document.getElementById('textToAnalyze').value = keyword;
+    analyzeText();
+}
+
+// Scroll to analyzer section
+function scrollToAnalyzer() {
+    document.getElementById('analysis').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start' 
+    });
+}
+
+// Text analysis function (updated)
+async function analyzeText(event) {
+    event.preventDefault();
+    const text = document.getElementById('textToAnalyze').value.trim();
+    const resultsDiv = document.getElementById('analysisResults');
+    
+    if (!text) {
+        resultsDiv.innerHTML = `
+            <div class="alert bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-circle text-yellow-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            Please enter some text to analyze.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    resultsDiv.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+            <p class="text-gray-600">Analyzing text for drug-related patterns...</p>
+        </div>
+    `;
+
+    try {
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Mock analysis results
+        const mockResults = {
+            isSuspicious: Math.random() > 0.3,
+            confidence: Math.random() * 0.5 + 0.5,
+            keywords: [],
+            warning: null
+        };
+
+        // Extract potential keywords
+        const keywordPatterns = ['🍁', '🔥', '🔌', 'Wickr', 'BTC', '#420', 'DM', '🍄', '❄️', '💊', 'Monero', 'Escrow', 'menu', 'signal', 'secure', 'cashapp', 'venmo', 'pharma', 'plug'];
+        mockResults.keywords = keywordPatterns.filter(kw => 
+            text.toLowerCase().includes(kw.toLowerCase())
+        );
+
+        if (mockResults.keywords.length === 0 && mockResults.isSuspicious) {
+            mockResults.warning = "No specific keywords detected, but text structure matches known patterns";
+        }
+
+        displayAnalysisResults(mockResults);
+    } catch (error) {
+        resultsDiv.innerHTML = `
+            <div class="alert bg-red-50 border-l-4 border-red-400 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700">
+                            Error analyzing text: ${error.message}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Display results function (updated)
+function displayAnalysisResults(results) {
+    scrollToAnalyzer(); // Added this line
+    
+    const resultsDiv = document.getElementById('analysisResults');
+    resultsDiv.innerHTML = `
+        <div class="w-full">
+            <div class="${results.isSuspicious ? 'bg-red-50 border-l-4 border-red-400' : 'bg-green-50 border-l-4 border-green-400'} p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="${results.isSuspicious ? 'fas fa-exclamation-triangle text-red-500' : 'fas fa-check-circle text-green-500'} text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-medium ${results.isSuspicious ? 'text-red-800' : 'text-green-800'}">
+                            ${results.isSuspicious ? 'SUSPICIOUS CONTENT DETECTED' : 'No suspicious content found'}
+                        </h3>
+                        <div class="mt-2 text-sm ${results.isSuspicious ? 'text-red-700' : 'text-green-700'}">
+                            <p>
+                                Confidence: ${Math.round(results.confidence * 100)}% | 
+                                Risk Level: <span class="font-bold">${results.isSuspicious ? 'High' : 'Low'}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-md font-medium text-gray-900 mb-3">Detected Keywords</h4>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    ${results.keywords.length > 0 ? 
+                        results.keywords.map(kw => `
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                                ${kw}
+                            </span>
+                        `).join('') : 
+                        '<span class="text-gray-500 text-sm">No specific keywords detected</span>'}
+                </div>
+                ${results.warning ? `
+                    <div class="text-yellow-700 text-sm flex items-start">
+                        <i class="fas fa-exclamation-circle mt-0.5 mr-2"></i>
+                        <span>${results.warning}</span>
+                    </div>
+                ` : ''}
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-md font-medium text-gray-900 mb-3">Confidence Breakdown</h4>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div class="bg-blue-600 h-2.5 rounded-full" 
+                         style="width: ${Math.round(results.confidence * 100)}%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600">
+                    <span>0%</span>
+                    <span>50%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="analyzeText(event)" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-redo mr-1"></i> Analyze Again
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Initialize form submission handler
+document.getElementById('analysisForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    analyzeText(e);
+});
+    </script>
+</body>
+</html>
