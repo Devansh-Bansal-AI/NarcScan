@@ -1,6 +1,6 @@
 # 🚀 NarcScan - AI-Powered Drug Sale Detection System
 
-![NarcScan Screenshot](frontend/assets/screenshot.png)
+![NarcScan Screenshot](frontend/GITHUB image.jpg)
 
 NarcScan is an **experimental AI-powered system** that detects potentially illicit drug-related conversations.  
 This repository contains a full-stack demo setup with a **placeholder keyword-based model** (easy to replace with your own trained ML model).
